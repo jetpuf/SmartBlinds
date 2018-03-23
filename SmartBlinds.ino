@@ -211,9 +211,10 @@ server.on("/0", []() { server.send(200, "text/html", webPage);   setting = 0; })
 
 
 void loop() {
+
 buttonState = digitalRead(buttonPin);
 
-if(buttonState == LOW && setting <= 180 && direction == 0){
+if(buttonState == LOW && setting < 180 && direction == 0){
   setting++;
   delay(0);
   if(setting == 180){
@@ -221,14 +222,24 @@ if(buttonState == LOW && setting <= 180 && direction == 0){
     }
   }
   
-if(buttonState == LOW && setting >= 0 && direction == 1){
+if(buttonState == LOW && setting > 0 && direction == 1){
   setting--;
   delay(0);
   if(setting == 0){
     direction = 0;
     }
   }
+  
+if(buttonState == LOW && setting == 180 && direction == 0){
+  setting--;
+  delay(0);
+  }
 
+if(buttonState == LOW && setting == 0 && direction == 1){
+  setting++;
+  delay(0);
+  }
+  
 if(position < setting){
    servoA.attach(servoPin);
    servoA.write(position++);
