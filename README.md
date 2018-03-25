@@ -1,2 +1,2 @@
 # SmartBlinds
-SmartBlonds
+SmartBlinds
